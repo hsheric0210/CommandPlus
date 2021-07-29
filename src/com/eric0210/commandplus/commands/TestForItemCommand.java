@@ -74,7 +74,9 @@ public class TestForItemCommand extends AbstractCommand
 				case 3:
 					return CommandUtils.TABCOMPLETE_AND_OR;
 				case 4:
-					return CommandUtils.TABCOMPLETE_SLOT_ID;
+					if (args[3].startsWith("armor."))
+						return CommandUtils.TABCOMPLETE_ARMOR_SLOT_ID;
+					return CommandUtils.TABCOMPLETE_ENTITY_SLOT_ID;
 				case 5:
 					return CommandUtils.TABCOMPLETE_MATERIAL_NAMES;
 			}
@@ -82,7 +84,7 @@ public class TestForItemCommand extends AbstractCommand
 			switch (args.length)
 			{
 				case 5:
-					return CommandUtils.TABCOMPLETE_SLOT_ID;
+					return CommandUtils.TABCOMPLETE_BLOCK_SLOT_ID;
 				case 6:
 					return CommandUtils.TABCOMPLETE_MATERIAL_NAMES;
 			}

@@ -19,7 +19,9 @@ public final class CommandUtils
 	public static final List<String> TABCOMPLETE_TARGETSELECTOR_OPTIONS = Arrays.asList("rm", "r", "lm", "l", "x", "y", "z", "m", "c");
 	public static final List<String> TABCOMPLETE_TARGETSELECTOR_CLOSING_BRACE = Collections.singletonList("]");
 	public static final List<String> TABCOMPLETE_MATERIAL_NAMES = Arrays.stream(Material.values()).map(Enum::name).collect(Collectors.toList());
-	public static final List<String> TABCOMPLETE_SLOT_ID = Arrays.asList("rm", "r", "lm", "l", "x", "y", "z", "m", "c");
+	public static final List<String> TABCOMPLETE_BLOCK_SLOT_ID = Collections.singletonList("container.");
+	public static final List<String> TABCOMPLETE_ENTITY_SLOT_ID = Arrays.asList("armor.", "enderchest.", "inventory.", "hotbar.");
+	public static final List<String> TABCOMPLETE_ARMOR_SLOT_ID = Arrays.asList("head.", "chest.", "legs.", "feet.");
 	public static final List<String> TABCOMPLETE_AND_OR = Arrays.asList("and", "or");
 
 	private CommandUtils()

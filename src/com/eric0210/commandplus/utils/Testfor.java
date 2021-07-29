@@ -25,7 +25,7 @@ public final class Testfor
 		if (searchAll)
 			return (int) IntStream.range(0, inventory.getSize()).filter(i -> singleItem(inventory.getItem(i), itemType, amount, data, datatags)).count();
 
-		if (singleItem(inventory.getItem(slot), itemType, amount, data, datatags))
+		if (slot < inventory.getSize() && singleItem(inventory.getItem(slot), itemType, amount, data, datatags))
 			return 1;
 
 		return 0;
