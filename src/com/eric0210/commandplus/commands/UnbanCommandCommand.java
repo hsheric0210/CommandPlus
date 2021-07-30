@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.eric0210.commandplus.utils.CommandUtils;
+import com.eric0210.commandplus.utils.StringPool;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -26,10 +26,10 @@ public class UnbanCommandCommand extends AbstractCommand
 			if (CommandUtils.isBanned(cmd))
 			{
 				CommandUtils.removeBannedCommand(cmd);
-				sender.sendMessage(ChatColor.GREEN + "명령어 '" + cmd + "'의 사용 금지 조치를 해제하였습니다.");
+				sender.sendMessage(String.format(StringPool.UNBANCOMMAND_RESPONCE, cmd));
 			}
 			else
-				sender.sendMessage(ChatColor.RED + "이 명령어는 사용 금지 조치되어 있지 않습니다!");
+				sender.sendMessage(StringPool.E_COMMAND_NOT_BANNED);
 
 			return true;
 		}

@@ -43,13 +43,13 @@ public class TeleportPlusCommand extends AbstractCommand
 
 				if ((pos = Parser.parsePosition(player.getLocation().toVector(), args[1], args[2], args[3])) == null)
 				{
-					sender.sendMessage(StringPool.E_FAILED_TO_PARSE_POSITION);
+					sender.sendMessage(StringPool.E_POSITION_FORMAT_EXCEPTION);
 					return false;
 				}
 
 				player.teleport(new Location(player.getWorld(), pos.getX(), pos.getY(), pos.getZ(), yaw, pitch), TeleportCause.COMMAND);
 
-				sender.sendMessage(ChatColor.GREEN + player.getName() + "을(를) 성공적으로 " + pos + "으로 순간이동시켰습니다.");
+				sender.sendMessage(String.format(StringPool.TELEPORTPLUS_SUCCESS, player.getName(), pos));
 			}
 			return true;
 		}
@@ -63,4 +63,5 @@ public class TeleportPlusCommand extends AbstractCommand
 			return CommandUtils.tabCompleteTargetSelector(args);
 		return null;
 	}
-}
+
+	}

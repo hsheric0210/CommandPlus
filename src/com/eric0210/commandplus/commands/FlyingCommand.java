@@ -40,7 +40,7 @@ public class FlyingCommand extends AbstractCommand
 					player.setAllowFlight(true);
 				player.setFlying(state);
 			}
-			sender.sendMessage((state ? ChatColor.GREEN : ChatColor.RED) + Utils.serializePlayerArray(players) + "(들)은 이제 " + (state ? "날고 있" : "날고 있지 않") + "습니다.");
+			sender.sendMessage(String.format(state ? StringPool.FLYING_ENABLED : StringPool.FLYING_DISABLED, Utils.serializePlayerArray(players)));
 			return true;
 		}
 		return false;

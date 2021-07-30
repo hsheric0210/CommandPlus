@@ -8,7 +8,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.Utils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -40,7 +39,7 @@ public class CompassTargetCommand extends AbstractCommand
 					execPos = ((BlockCommandSender) sender).getBlock().getLocation();
 				else
 				{
-					sender.sendMessage(StringPool.E_EXECUTION_POSITION_NOT_RECOGNIZED);
+					sender.sendMessage(StringPool.E_EXECUTION_POSITION_NOT_FOUND);
 					return false;
 				}
 
@@ -49,7 +48,7 @@ public class CompassTargetCommand extends AbstractCommand
 					final Vector pos = Parser.parsePosition(execPos.toVector(), args[1], args[2], args[3]);
 					if (pos == null)
 					{
-						sender.sendMessage(StringPool.E_FAILED_TO_PARSE_POSITION);
+						sender.sendMessage(StringPool.E_POSITION_FORMAT_EXCEPTION);
 						return false;
 					}
 
@@ -57,7 +56,7 @@ public class CompassTargetCommand extends AbstractCommand
 					for (final Player player : players)
 						player.setCompassTarget(loc);
 
-					sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 나침반 목표 위치를 " + pos + " (으)로 바꾸었습니다.");
+					sender.sendMessage(String.format(StringPool.COMPASSTARGET_CHANGED_LOCATION, Utils.serializePlayerArray(players), pos));
 				}
 				catch (final NumberFormatException ignored)
 				{

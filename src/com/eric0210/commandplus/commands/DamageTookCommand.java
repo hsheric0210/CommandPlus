@@ -37,13 +37,13 @@ public class DamageTookCommand extends AbstractCommand
 					for (final Player player : players)
 						PlayerWrapper.getPlayer(player).damageTook = percent / 100;
 
-					sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 받는 데미지를 " + percent + "%(으)로 조정했습니다.");
+					sender.sendMessage(String.format(StringPool.DAMAGETOOK_CHANGED, Utils.serializePlayerArray(players), percent));
 					CommandPlus.saveToDB();
 					return true;
 				}
 				catch (final NumberFormatException ignored)
 				{
-					sender.sendMessage(String.format(StringPool.E_FAILED_TO_PARSE_NUMBER, percentString));
+					sender.sendMessage(String.format(StringPool.E_NUMBER_FORMAT_EXCEPTION, percentString));
 					return false;
 				}
 			}

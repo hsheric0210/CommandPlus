@@ -34,7 +34,7 @@ public class VelocityCommand extends AbstractCommand
 					final Vector newVelocity = new Vector(Parser.parseVelocity(args[1], prevVelocity.getX()), Parser.parseVelocity(args[2], prevVelocity.getY()), Parser.parseVelocity(args[3], prevVelocity.getZ()));
 					player.setVelocity(newVelocity);
 
-					sender.sendMessage(ChatColor.GREEN + player.getName() + "에게 " + newVelocity + " 만큼의 가속을 주었습니다.");
+					sender.sendMessage(String.format(StringPool.VELOCITY_APPLIED, player.getName(), newVelocity));
 				}
 				return true;
 			}
@@ -52,4 +52,5 @@ public class VelocityCommand extends AbstractCommand
 			return CommandUtils.tabCompleteTargetSelector(args);
 		return null;
 	}
-}
+
+	}

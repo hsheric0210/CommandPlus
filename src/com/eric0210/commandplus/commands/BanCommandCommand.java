@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.eric0210.commandplus.utils.CommandUtils;
+import com.eric0210.commandplus.utils.StringPool;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -24,11 +24,11 @@ public class BanCommandCommand extends AbstractCommand
 			final String cmd = args[0].toLowerCase(Locale.ENGLISH);
 
 			if (CommandUtils.isBanned(cmd))
-				sender.sendMessage(ChatColor.RED + "이 명령어는 이미 사용 금지 조치되어 있습니다!");
+				sender.sendMessage(StringPool.E_COMMAND_ALREADY_BANNED);
 			else
 			{
 				CommandUtils.addBannedCommand(cmd);
-				sender.sendMessage(ChatColor.GREEN + "명령어 '" + cmd + "'를 사용 금지 조치 시켰습니다.");
+				sender.sendMessage(String.format(StringPool.BANCOMMAND_RESPONCE, cmd));
 			}
 
 			return true;

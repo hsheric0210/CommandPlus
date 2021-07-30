@@ -9,7 +9,6 @@ import com.eric0210.commandplus.utils.Testfor;
 import com.eric0210.commandplus.utils.Utils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -27,12 +26,13 @@ public class TestForHeldItemCommand extends AbstractCommand
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args)
 	{
+		BlockCommandSender cmdBlockSender = null;
+		if (sender instanceof BlockCommandSender)
+			cmdBlockSender = (BlockCommandSender) sender;
+
 		final int argCount = args.length;
 		if (argCount >= 2)
 		{
-			BlockCommandSender cmdBlockSender = null;
-			if (sender instanceof BlockCommandSender)
-				cmdBlockSender = (BlockCommandSender) sender;
 
 			final Player[] players = PlayerSelector.getPlayers(sender, args[0]);
 			if (players.length <= 0)
@@ -46,7 +46,7 @@ public class TestForHeldItemCommand extends AbstractCommand
 			final Material mat = Material.matchMaterial(args[2].toUpperCase(Locale.ENGLISH));
 			if (mat == null)
 			{
-				sender.sendMessage(String.format(StringPool.E_ITEM_TYPE_NOT_RECOGNIZED, args[2]));
+				sender.sendMessage(String.format(StringPool.E_UNKNOWN_ITEM_TYPE, args[2]));
 				return false;
 			}
 
@@ -75,17 +75,20 @@ public class TestForHeldItemCommand extends AbstractCommand
 				if (cmdBlockSender != null)
 					CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, count);
 
-				sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 손에서 입력된 아이템을 총 " + count + "개 찾았습니다.");
+				sender.sendMessage(String.format(StringPool.TESTFORHELDITEM_FOUND, Utils.serializePlayerArray(players), count));
 			}
 			else
 			{
 				if (cmdBlockSender != null)
 					CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, 0);
 
-				sender.sendMessage(ChatColor.RED + Utils.serializePlayerArray(players) + "(들)의 손에서 입력된 아이템을 찾지 못했습니다.");
+				sender.sendMessage(String.format(StringPool.TESTFORHELDITEM_NOT_FOUND, Utils.serializePlayerArray(players)));
 			}
 			return true;
 		}
+
+		if (cmdBlockSender != null)
+			CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, 0);
 		return false;
 	}
 

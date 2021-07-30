@@ -10,7 +10,6 @@ import com.eric0210.commandplus.utils.CommandUtils;
 import com.eric0210.commandplus.utils.Parser;
 import com.eric0210.commandplus.utils.StringPool;
 
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -36,7 +35,7 @@ public class ChunkLoadCommand extends AbstractCommand
 
 		if (world == null)
 		{
-			sender.sendMessage(StringPool.E_WORLD_NOT_RECOGNIZED);
+			sender.sendMessage(StringPool.E_WORLD_NOT_FOUND);
 			return true;
 		}
 
@@ -64,7 +63,7 @@ public class ChunkLoadCommand extends AbstractCommand
 							for (int chunkZ = chunkZMin; chunkZ <= chunkZMax; chunkZ++)
 								ChunkLoader.loadChunkAt(world, chunkX, chunkZ, generate);
 
-						sender.sendMessage(ChatColor.GREEN + String.format("청크 (%d ~ %d, %d ~ %d) 를 로드하였습니다.", chunkXMin, chunkXMax, chunkZMin, chunkZMax));
+						sender.sendMessage(String.format(StringPool.CHUNKLOAD_LOADED_CHUNK, chunkXMin, chunkXMax, chunkZMin, chunkZMax));
 						break;
 					}
 
@@ -74,7 +73,7 @@ public class ChunkLoadCommand extends AbstractCommand
 							for (int chunkZ = chunkZMin; chunkZ <= chunkZMax; chunkZ++)
 								ChunkLoader.unloadChunkAt(world, chunkX, chunkZ, true, safe);
 
-						sender.sendMessage(ChatColor.GREEN + String.format("청크 (%d ~ %d, %d ~ %d) 를 언로드하였습니다.", chunkXMin, chunkXMax, chunkZMin, chunkZMax));
+						sender.sendMessage(String.format(StringPool.CHUNKLOAD_UNLOADED_CHUNK, chunkXMin, chunkXMax, chunkZMin, chunkZMax));
 						break;
 
 					case "start":
@@ -90,7 +89,7 @@ public class ChunkLoadCommand extends AbstractCommand
 
 						CommandPlus.saveToDB();
 
-						sender.sendMessage(ChatColor.GREEN + String.format("청크 (%d ~ %d, %d ~ %d) 를 언로드로부터 보호하기 시작하였습니다.", chunkXMin, chunkXMax, chunkZMin, chunkZMax));
+						sender.sendMessage(String.format(StringPool.CHUNKLOAD_PROTECTION_STARTED, chunkXMin, chunkXMax, chunkZMin, chunkZMax));
 						break;
 					}
 
@@ -102,7 +101,7 @@ public class ChunkLoadCommand extends AbstractCommand
 
 						CommandPlus.saveToDB();
 
-						sender.sendMessage(ChatColor.GREEN + String.format("청크 (%d ~ %d, %d ~ %d) 를 언로드로부터 보호하는 것을 중지하였습니다.", chunkXMin, chunkXMax, chunkZMin, chunkZMax));
+						sender.sendMessage(String.format(StringPool.CHUNKLOAD_PROTECTION_STOPPED, chunkXMin, chunkXMax, chunkZMin, chunkZMax));
 						break;
 					}
 
@@ -112,7 +111,7 @@ public class ChunkLoadCommand extends AbstractCommand
 							for (int chunkZ = chunkZMin; chunkZ <= chunkZMax; chunkZ++)
 								ChunkLoader.refreshChunkAt(world, chunkX, chunkZ);
 
-						sender.sendMessage(ChatColor.GREEN + String.format("청크 (%d ~ %d, %d ~ %d) 를 리프레시하였습니다.", chunkXMin, chunkXMax, chunkZMin, chunkZMax));
+						sender.sendMessage(String.format(StringPool.CHUNKLOAD_REFRESHED_CHUNK, chunkXMin, chunkXMax, chunkZMin, chunkZMax));
 						break;
 					}
 
@@ -124,7 +123,7 @@ public class ChunkLoadCommand extends AbstractCommand
 			}
 			catch (final NumberFormatException ignored)
 			{
-				sender.sendMessage(StringPool.E_CHUNK_COORDINATE_NOT_RECOGNIZED);
+				sender.sendMessage(StringPool.E_CHUNK_COORDINATE_FORMAT_EXCEPTION);
 			}
 
 			return true;

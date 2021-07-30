@@ -8,7 +8,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.Utils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,7 +36,7 @@ public class FlightAllowedCommand extends AbstractCommand
 			for (final Player player : players)
 				player.setAllowFlight(state);
 
-			sender.sendMessage((state ? ChatColor.GREEN : ChatColor.RED) + Utils.serializePlayerArray(players) + "(들)은 이제 날 수 " + (state ? "있" : "없") + "습니다.");
+			sender.sendMessage(String.format(state ? StringPool.FLIGHTALLOWED_ENABLED : StringPool.FLIGHTALLOWED_DISABLED, Utils.serializePlayerArray(players)));
 			return true;
 		}
 		return false;

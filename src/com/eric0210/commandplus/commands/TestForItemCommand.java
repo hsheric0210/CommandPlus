@@ -127,7 +127,7 @@ public class TestForItemCommand extends AbstractCommand
 		final Material itemType = Material.matchMaterial(itemName);
 		if (itemType == null)
 		{
-			sender.sendMessage(String.format(StringPool.E_ITEM_TYPE_NOT_RECOGNIZED, itemName));
+			sender.sendMessage(String.format(StringPool.E_UNKNOWN_ITEM_TYPE, itemName));
 			return false;
 		}
 
@@ -163,7 +163,7 @@ public class TestForItemCommand extends AbstractCommand
 								slotItem = target.getInventory().getBoots();
 								break;
 							default:
-								sender.sendMessage(String.format(StringPool.E_ARMOR_SLOT_NOT_RECOGNIZED, rawFullSlotName));
+								sender.sendMessage(String.format(StringPool.E_UNKNOWN_ARMOR_SLOT, rawFullSlotName));
 								return false;
 						}
 
@@ -196,14 +196,14 @@ public class TestForItemCommand extends AbstractCommand
 			if (cmdBlockSender != null)
 				CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, count);
 
-			sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(targets) + "(들)에게서 입력된 아이템을 총 " + count + "개 찾았습니다.");
+			sender.sendMessage(String.format(StringPool.TESTFORITEM_ENTITY_FOUND, Utils.serializePlayerArray(targets), count));
 		}
 		else
 		{
 			if (cmdBlockSender != null)
 				CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, 0);
 
-			sender.sendMessage(ChatColor.RED + Utils.serializePlayerArray(targets) + "(들)에게서 입력된 아이템을 찾지 못했습니다.");
+			sender.sendMessage(String.format(StringPool.TESTFORITEM_ENTITY_NOT_FOUND, Utils.serializePlayerArray(targets)));
 		}
 
 		return true;
@@ -232,7 +232,7 @@ public class TestForItemCommand extends AbstractCommand
 		final Vector pos = Parser.parsePosition(execPos.toVector(), args[1], args[2], args[3]);
 		if (pos == null)
 		{
-			sender.sendMessage(StringPool.E_FAILED_TO_PARSE_POSITION);
+			sender.sendMessage(StringPool.E_POSITION_FORMAT_EXCEPTION);
 			return false;
 		}
 
@@ -257,7 +257,7 @@ public class TestForItemCommand extends AbstractCommand
 		final Material itemType = Material.matchMaterial(itemName);
 		if (itemType == null)
 		{
-			sender.sendMessage(String.format(StringPool.E_ITEM_TYPE_NOT_RECOGNIZED, itemName));
+			sender.sendMessage(String.format(StringPool.E_UNKNOWN_ITEM_TYPE, itemName));
 			return false;
 		}
 
@@ -290,25 +290,25 @@ public class TestForItemCommand extends AbstractCommand
 						CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, count);
 
 					if (count > 0)
-						sender.sendMessage(ChatColor.GREEN + pos.toString() + "(" + block.getType() + ")의 인벤토리에서 입력된 아이템을 총 " + count + "개 찾았습니다.");
+						sender.sendMessage(String.format(StringPool.TESTFORITEM_BLOCK_FOUND_COUNT, pos, block.getType(), count));
 					else
-						sender.sendMessage(ChatColor.RED + pos.toString() + "(" + block.getType() + ")의 인벤토리에서 입력된 아이템을 찾지 못했습니다.");
+						sender.sendMessage(String.format(StringPool.TESTFORITEM_BLOCK_NOT_FOUND, pos, block.getType()));
 				}
 				else if (Testfor.singleItem(blockinv.getItem(Parser.parseInt(slotPieces[1], -1)), itemType, amount, data, datatags))
 				{
 					if (cmdBlockSender != null)
 						CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, 1);
 
-					sender.sendMessage(ChatColor.GREEN + pos.toString() + "(" + block.getType() + ")의 인벤토리에서 입력된 아이템을 찾았습니다.");
+					sender.sendMessage(String.format(StringPool.TESTFORITEM_BLOCK_FOUND, pos, block.getType()));
 				}
 				else
 				{
 					if (cmdBlockSender != null)
 						CommandUtils.setCommandBlockAnalogOutput(cmdBlockSender, 0);
 
-					sender.sendMessage(ChatColor.RED + pos.toString() + "(" + block.getType() + ")의 인벤토리에서 입력된 아이템을 찾지 못했습니다.");
+					sender.sendMessage(String.format(StringPool.TESTFORITEM_BLOCK_NOT_FOUND, pos, block.getType()));
 				}
 		return true;
 	}
 
-}
+	}

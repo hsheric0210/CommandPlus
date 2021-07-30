@@ -9,7 +9,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.Utils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,12 +45,12 @@ public class MaxHealthCommand extends AbstractCommand
 						PlayerWrapper.getPlayer(player).maxHealth = health;
 					}
 					CommandPlus.saveToDB();
-					sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 최대 체력을 " + health + "로 조정했습니다.");
+					sender.sendMessage(String.format(StringPool.MAXHEALTH_CHANGED, Utils.serializePlayerArray(players), health));
 					return true;
 				}
 				catch (final NumberFormatException ignored)
 				{
-					sender.sendMessage(String.format(StringPool.E_FAILED_TO_PARSE_NUMBER, healthString));
+					sender.sendMessage(String.format(StringPool.E_NUMBER_FORMAT_EXCEPTION, healthString));
 					return false;
 				}
 			}

@@ -9,7 +9,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.Utils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -40,12 +39,12 @@ public class FoodLevelCommand extends AbstractCommand
 						PlayerWrapper.getPlayer(player).foodLevel = foodLevel;
 					}
 					CommandPlus.saveToDB();
-					sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 배고픔 수치를 " + foodLevel + "로 조정했습니다.");
+					sender.sendMessage(String.format(StringPool.FOODLEVEL_CHANGED, Utils.serializePlayerArray(players), foodLevel));
 					return true;
 				}
 				catch (final NumberFormatException ignored)
 				{
-					sender.sendMessage(String.format(StringPool.E_FAILED_TO_PARSE_NUMBER, foodLevelString));
+					sender.sendMessage(String.format(StringPool.E_NUMBER_FORMAT_EXCEPTION, foodLevelString));
 					return false;
 				}
 			}

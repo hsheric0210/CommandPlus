@@ -44,7 +44,7 @@ public class TargetCommand extends AbstractCommand
 				final String finalKey = key;
 				CommandPlus.targetPositions.computeIfAbsent(player.getUniqueId(), uuid -> new HashSet<>(1)).removeIf(v -> finalKey.equalsIgnoreCase(v.getKey()));
 				CommandPlus.targetPositions.get(player.getUniqueId()).add(new SimpleImmutableEntry<>(key, pos));
-				sender.sendMessage(ChatColor.GREEN + "위치 (" + pos + ") 이(가) '" + key + "'(이)라는 이름으로 저장되었습니다.");
+				sender.sendMessage(String.format(StringPool.TARGET, pos, key));
 			}
 			else
 				sender.sendMessage(StringPool.E_POSITION_NOT_SPECIFIED);
@@ -66,4 +66,4 @@ public class TargetCommand extends AbstractCommand
 		return null;
 	}
 
-}
+	}

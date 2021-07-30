@@ -8,10 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.eric0210.commandplus.commands.AbstractCommand;
-import com.eric0210.commandplus.utils.ChunkLoader;
-import com.eric0210.commandplus.utils.CommandUtils;
-import com.eric0210.commandplus.utils.TaskManager;
-import com.eric0210.commandplus.utils.VehicleUtils;
+import com.eric0210.commandplus.utils.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -37,17 +34,17 @@ public class CommandPlus extends JavaPlugin
 	{
 		INSTANCE = this;
 
-		LOGGER.info("Registering commands...");
+		LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Registering commands...");
 		AbstractCommand.registerAll(this);
-		LOGGER.info("Done registering commands.");
+		LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Done registering commands.");
 
-		LOGGER.info("Registering event listener...");
+		LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Registering event listener...");
 		Bukkit.getPluginManager().registerEvents(new EventListener(), this);
-		LOGGER.info("Done registering event listener.");
+		LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Done registering event listener.");
 
 		if (DATABASE_FILE.exists())
 		{
-			LOGGER.info("Parsing existing database file (command+.yml)...");
+			LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Parsing existing database file (command+.yml)...");
 			try
 			{
 				database.load(DATABASE_FILE);
@@ -55,9 +52,9 @@ public class CommandPlus extends JavaPlugin
 			}
 			catch (final InvalidConfigurationException | IOException ex)
 			{
-				LOGGER.log(Level.WARNING, "Failed to parse existing database file! (" + ex.getMessage() + ")", ex);
+				LOGGER.log(Level.WARNING, StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Failed to parse existing database file! (" + ex.getMessage() + ")", ex);
 			}
-			LOGGER.info("Done parsing existing database file (command+.yml).");
+			LOGGER.info(StringPool.PLUGIN_PREFIX_WITHOUT_COLOR + "Done parsing existing database file (command+.yml).");
 		}
 
 		for (final PlayerWrapper wrapper : PlayerWrapper.getPlayerWrappers().values())

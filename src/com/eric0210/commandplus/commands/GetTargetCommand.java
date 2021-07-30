@@ -7,7 +7,6 @@ import java.util.Set;
 import com.eric0210.commandplus.CommandPlus;
 import com.eric0210.commandplus.utils.StringPool;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -32,7 +31,7 @@ public class GetTargetCommand extends AbstractCommand
 				for (final Entry<String, Vector> entry : positions)
 				{
 					final Vector pos = entry.getValue();
-					sender.sendMessage(ChatColor.GREEN + "저장된 위치" + ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + ChatColor.BOLD + entry.getKey() + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + "= " + ChatColor.DARK_GRAY + "[(" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + pos + ChatColor.DARK_GRAY + ")" + ChatColor.GRAY + ", block=" + ChatColor.DARK_GRAY + "(" + ChatColor.AQUA + pos.getBlockX() + ", " + pos.getBlockY() + ", " + pos.getBlockZ() + ChatColor.DARK_GRAY + ")" + ChatColor.GRAY + ", chunk=" + ChatColor.DARK_GRAY + "(" + ChatColor.BLUE + (pos.getBlockX() >> 4) + ", " + (pos.getBlockZ() >> 4) + ChatColor.DARK_GRAY + ")" + ChatColor.GREEN + "]");
+					sender.sendMessage(String.format(StringPool.GETTARGET, entry.getKey(), pos, pos.getBlockX(), pos.getBlockY(), pos.getBlockZ(), pos.getBlockX() >> 4, pos.getBlockZ() >> 4));
 				}
 			else
 				sender.sendMessage(StringPool.E_POSITION_NOT_STORED);

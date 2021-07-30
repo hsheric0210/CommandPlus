@@ -9,7 +9,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.VehicleUtils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -46,12 +45,12 @@ public class DismountCommand extends AbstractCommand
 
 				vehicle.eject();
 
-				sender.sendMessage(ChatColor.GREEN + player.getName() + "를 해당 플레이어가 타고 있던 이동 수단에게서 강제로 내쫒았습니다.");
+				sender.sendMessage(String.format(StringPool.DISMOUNT_PLAYER_EJECTION, player.getName()));
 
 				if (VehicleUtils.isMarkedAsSpecial(vehicle))
 				{
 					vehicle.remove();
-					sender.sendMessage(ChatColor.GREEN + player.getName() + "가 타고 있던 이동 수단은 제거되었습니다.");
+					sender.sendMessage(String.format(StringPool.DISMOUNT_VEHICLE_REMOVED, player.getName()));
 				}
 			}
 
@@ -69,4 +68,5 @@ public class DismountCommand extends AbstractCommand
 			return CommandUtils.tabCompleteTargetSelector(args);
 		return null;
 	}
+
 }

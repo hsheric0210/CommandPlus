@@ -29,7 +29,7 @@ public class CollectSignalCommand extends AbstractCommand
 				final Vector pos = Parser.parsePosition(bcs.getBlock().getLocation().toVector(), args[0], args[1], args[2]);
 				if (pos == null)
 				{
-					sender.sendMessage(StringPool.E_FAILED_TO_PARSE_POSITION);
+					sender.sendMessage(StringPool.E_POSITION_FORMAT_EXCEPTION);
 					return false;
 				}
 

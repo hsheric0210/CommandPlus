@@ -10,7 +10,6 @@ import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.VehicleUtils;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -80,7 +79,7 @@ public class MountCommand extends AbstractCommand
 
 						default:
 						{
-							sender.sendMessage(StringPool.E_VEHICLE_TYPE_NOT_RECOGNIZED);
+							sender.sendMessage(StringPool.E_UNKNOWN_VEHICLE_TYPE);
 							return false;
 						}
 					}
@@ -95,7 +94,7 @@ public class MountCommand extends AbstractCommand
 					if (!canDismount)
 						VehicleUtils.addDismountDeniedVehicle(player.getUniqueId(), vehicle.getEntityId());
 
-					sender.sendMessage(ChatColor.GREEN + player.getName() + "를 " + vehicleName + "에 탑승시켰습니다.");
+					sender.sendMessage(String.format(StringPool.MOUNT_MOUNTED, player.getName(), vehicleName));
 				}
 
 				CommandPlus.saveToDB();

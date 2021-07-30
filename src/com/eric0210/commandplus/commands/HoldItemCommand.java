@@ -35,13 +35,12 @@ public class HoldItemCommand extends AbstractCommand
 					if (slot >= 0 && slot <= 8)
 						for (final Player player : players)
 							player.getInventory().setHeldItemSlot(slot);
-					sender.sendMessage(ChatColor.GREEN + Utils.serializePlayerArray(players) + "(들)의 핫바 슬롯을 " + slot + "로 바꾸었습니다.");
 					break;
 				case "item":
 					final String itemName = args[2];
 					final Material mat = Material.matchMaterial(itemName);
 					if (mat == null)
-						sender.sendMessage(String.format(StringPool.E_ITEM_TYPE_NOT_RECOGNIZED, itemName));
+						sender.sendMessage(String.format(StringPool.E_UNKNOWN_ITEM_TYPE, itemName));
 
 					String amount = "";
 					if (argCount >= 4)

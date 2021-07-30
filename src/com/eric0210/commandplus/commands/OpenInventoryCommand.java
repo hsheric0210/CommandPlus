@@ -7,7 +7,6 @@ import com.eric0210.commandplus.utils.Parser;
 import com.eric0210.commandplus.utils.StringPool;
 import com.eric0210.commandplus.utils.selector.PlayerSelector;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.Command;
@@ -38,7 +37,7 @@ public class OpenInventoryCommand extends AbstractCommand
 						final Vector containerPosition = Parser.parsePosition(player.getLocation().toVector(), args[1], args[2], args[3]);
 						if (containerPosition == null)
 						{
-							sender.sendMessage(StringPool.E_FAILED_TO_PARSE_POSITION);
+							sender.sendMessage(StringPool.E_POSITION_FORMAT_EXCEPTION);
 							return false;
 						}
 
@@ -49,10 +48,10 @@ public class OpenInventoryCommand extends AbstractCommand
 							player.openInventory(((InventoryHolder) containerState).getInventory());
 							player.updateInventory();
 
-							sender.sendMessage(ChatColor.GREEN + "플레이어 " + player.getName() + "에 대해 (" + containerPosition + ")에 있는 블록의 인벤토리를 열었습니다.");
+							sender.sendMessage(String.format(StringPool.OPENINV_OPENED, player.getName(), containerPosition));
 						}
-
-						sender.sendMessage(String.format(StringPool.E_INVENTORY_NOT_FOUND, containerPosition.getBlockX(), containerPosition.getBlockY(), containerPosition.getBlockZ(), containerBlock.getType().name()));
+						else
+							sender.sendMessage(String.format(StringPool.E_INVENTORY_NOT_FOUND, containerPosition.getBlockX(), containerPosition.getBlockY(), containerPosition.getBlockZ(), containerBlock.getType().name()));
 					}
 					return true;
 				}
@@ -77,4 +76,5 @@ public class OpenInventoryCommand extends AbstractCommand
 
 		return null;
 	}
+
 }
